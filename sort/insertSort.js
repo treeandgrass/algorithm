@@ -1,15 +1,11 @@
 function insertSort(arr) {
-    for ( let i = arr.length; i > 1; i--) {
-        let current = 0;
-        for ( let j = 1; j < i; j++) {
-            if (arr[j] > arr[current]) {
-                current = j;
+    for (let i = 2; i <= arr.length; i++) {
+        for (let j = arr.length - i; j < arr.length - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                let tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
             }
-        }
-        if ( current !== i - 1) {
-            const tmp = arr[current];
-            arr[current] = arr[i - 1];
-            arr[i - 1] = tmp;
         }
     }
 }
