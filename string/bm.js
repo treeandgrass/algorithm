@@ -66,7 +66,7 @@ function bm(source,  pattern) {
         if ( j < 0) return i - pLength + 1;
 
         const bcNum = source.charCodeAt(i - p + j) - ACharNum;
-        let shift = j < pLength - 1 ? gs[j + 1] : 0;
+        let shift = j < pLength - 1 ? gs[j] : 0;
         shift = Math.max(j - bcArr[bcNum], shift);
         i += shift;
     }

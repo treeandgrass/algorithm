@@ -38,6 +38,6 @@ function bucketSort(arr, n) {
 }
 
 
-const sourceArr = [3, 4, 567, 100, 0, 34, 19, 67, 40, 2, 20, 6, 79, 12, 56];
+const sourceArr = [88, 86, 89, 88, 86, 86, 87, 88, 89, 85, 85, 85, 85, 85, 88];
 bucketSort(sourceArr, 10);
 console.log(sourceArr);
