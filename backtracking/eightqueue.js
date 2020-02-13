@@ -1,4 +1,4 @@
-function eightQueue() {
+function eightQueen() {
     const board = [];
     const record = new Array(8);
     const columns = new Array(8);
@@ -71,4 +71,4 @@ function eightQueue() {
     return record;
 }
 
-console.log(eightQueue());
+console.log(eightQueen());
