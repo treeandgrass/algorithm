@@ -84,9 +84,16 @@ class BST  {
                 mostRight = mostRightChild;
                 mostRightChild = mostRightChild.right;
             }
-            current.value = mostRightChild.value;
-            mostRight.right = mostRightChild.left;
-            mostRightChild.left = null;
+
+            if (mostRight === current) {
+                current.value = mostRightChild.value;
+                current.left = mostRightChild.left;
+                mostRightChild.left = null;
+            } else {
+                current.value = mostRightChild.value;
+                mostRight.right = mostRightChild.left;
+                mostRightChild.left = null;
+            }
         }
 
         return true;
