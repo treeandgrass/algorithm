@@ -168,3 +168,20 @@ bst2.insert(new Node(50));
 bst2.delete(new Node(20));
 
 bst2.breathFirstTraverse(bst2.root);
+
+
+
+const bst3 = new BST();
+
+bst3.insert(new Node(25));
+bst3.insert(new Node(20));
+bst3.insert(new Node(5));
+
+bst3.midiumOrder(bst3.root);
+console.log("--------");
+bst3.postorder(bst3.root);
+console.log("--------");
+bst3.preorder(bst3.root);
+console.log("--------");
+bst3.breathFirstTraverse(bst3.root);
+console.log("--------");
