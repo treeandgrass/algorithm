@@ -152,8 +152,9 @@ class RedBlackTree  {
             newParentOfA.left.color = newParentOfA.right.color;
             newParentOfA.right.color = leftColor;
         }
-            
+     
     }
+
 
     search(value) {
         let current = this.root;
@@ -167,6 +168,62 @@ class RedBlackTree  {
 
         return current;
     }
+
+    delete(paths) {
+        const length =  paths.length;
+        if (length === 0) return -1;
+
+        // case1
+        const parentOfA = paths[length - 2];
+        const A  = paths[length - 1];
+        const leftChildOfA = A.left;
+        const rightChildOfA = A.right;
+
+        if (!leftChildOfA && rightChildOfA) {
+            A.value = rightChildOfA.value;
+            A.left = rightChildOfA.left;
+            A.right = rightChildOfA.right;
+
+            rightChildOfA.left = null;
+            rightChildOfA.right = null;
+
+            if (A.color === 'b' && rightChildOfA.color === 'r') {
+                return;
+            }
+        }
+
+        if (!rightChildOfA && leftChildOfA) {
+            A.value = leftChildOfA.value;
+            A.left = leftChildOfA.left;
+            A.right = leftChildOfA.right;
+
+            leftChildOfA.left = null;
+            leftChildOfA.right = null;
+
+            if (A.color === 'b' && leftChildOfA.color === 'r') {
+                return;
+            }
+        }
+
+        if (!leftChildOfA && !rightChildOfA) {
+            if (!parentOfA) {
+                this.root = null;
+                return -1;
+            }
+
+            if (parentOfA.left === A) {
+                parentOfA.left = null;
+                return -1;
+            } else {
+                parentOfA.right = null;
+                return -1;
+            }
+        }
+
+        // case2
+    }
+
+
 
     delete(node) {
         let parent = null;
@@ -185,36 +242,7 @@ class RedBlackTree  {
             return true;
         }
 
-        if (!current.left)  {
-            if (!parent) {
-                this.root = current.right;
-            } else {
-                if (parent.value < current.value) {
-                    parent.right = current.right;
-                } else {
-                    parent.left = current.right;
-                }
-            }
-            current.right = null;
-        } else {
-            let mostRight = current;
-            let mostRightChild  = current.left;
-            while (mostRightChild.right) {
-                mostRight = mostRightChild;
-                mostRightChild = mostRightChild.right;
-            }
-
-            if (mostRight === current) {
-                current.value = mostRightChild.value;
-                current.left = mostRightChild.left;
-                mostRightChild.left = null;
-            } else {
-                current.value = mostRightChild.value;
-                mostRight.right = mostRightChild.left;
-                mostRightChild.left = null;
-            }
-        }
-
+        
         return true;
     }
 
