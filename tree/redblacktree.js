@@ -169,63 +169,46 @@ class RedBlackTree  {
         return current;
     }
 
-    delete(paths) {
-        const length =  paths.length;
-        if (length === 0) return -1;
-
-        // case1
-        const parentOfA = paths[length - 2];
-        const A  = paths[length - 1];
-        const leftChildOfA = A.left;
-        const rightChildOfA = A.right;
-
-        if (!leftChildOfA && rightChildOfA) {
-            A.value = rightChildOfA.value;
-            A.left = rightChildOfA.left;
-            A.right = rightChildOfA.right;
-
-            rightChildOfA.left = null;
-            rightChildOfA.right = null;
-
-            if (A.color === 'b' && rightChildOfA.color === 'r') {
-                return;
-            }
+    checkDeleteState(A) {
+        if (!A.left && A.right) {
+            return 1;
+        } else if (A.left && !A.right) {
+            return 1;
+        } else if (!A.left&& !B.left) {
+            return -1;
+        } else if (A.right && !A.right.left) {
+            return 2
+        } else if (A.right && A.right.left) {
+            return 3;
+        } else {
+            return -1;
         }
-
-        if (!rightChildOfA && leftChildOfA) {
-            A.value = leftChildOfA.value;
-            A.left = leftChildOfA.left;
-            A.right = leftChildOfA.right;
-
-            leftChildOfA.left = null;
-            leftChildOfA.right = null;
-
-            if (A.color === 'b' && leftChildOfA.color === 'r') {
-                return;
-            }
-        }
-
-        if (!leftChildOfA && !rightChildOfA) {
-            if (!parentOfA) {
-                this.root = null;
-                return -1;
-            }
-
-            if (parentOfA.left === A) {
-                parentOfA.left = null;
-                return -1;
-            } else {
-                parentOfA.right = null;
-                return -1;
-            }
-        }
-
-        // case2
     }
 
-
+    checkSecondAjustment(A, parentOfA) {
+        let brotherOfA = parentOfA.left;
+        if (parentOfA.left  === A) {
+            brotherOfA =  parentOfA.right;
+        }
+        if (brotherOfA.color === 'r') {
+            return 1;
+        } else if (brotherOfA.color === 'b') {
+            if (brotherOfA.left.color === 'b' &&  brotherOfA.right.color ==='b') {
+                return 2;
+            }
+        } else if (brotherOfA.color === 'b') {
+            if (brotherOfA.left && brotherOfA.left.color === 'r' && brotherOfA.left.color === 'b') {
+                return 3;
+            }
+        } else if (brotherOfA.color  === 'b' && brotherOfA.right.color === 'r') {
+            return 4;
+        } else {
+            return -1;
+        }
+    }
 
     delete(node) {
+        const paths = [];
         let parent = null;
         let current = this.root;
 
@@ -236,12 +219,57 @@ class RedBlackTree  {
             } else {
                 current = current.left;
             }
+
+            paths.push(current);
         }
 
         if (!current) {
             return true;
         }
 
+        paths.push(current);
+
+        let A = current;
+        let state  = this.checkDeleteState(A);
+        if (state ===  1) {
+            if (paths.length === 1) {
+                this.root = A.right;
+                A.right =  null;
+            } else {
+                let parentOfA = paths[paths.length - 2];
+                let rightChildOfA = A.right;
+                if (parentOfA.left === A) {
+                    parentOfA.left  = rightChildOfA;
+                } else {
+                    parentOfA.right = rightChildOfA;
+                }
+                A.right = null;
+            }
+
+            if (A.color === 'b' && rightChildOfA.color === 'r') {
+                return;
+            }
+        } else if (state === 2) {
+            let rightChildOfA = A.right;
+            rightChildOfA.left = A.left;
+
+            if (paths.length === 1) {
+                this.root = rightChildOfA;
+                A.right = null;
+            } else if (state === 2) {
+                let parentOfA = paths[paths.length - 2];
+                if (parentOfA.left  === A) {
+                    parentOfA.left =  rightChildOfA;
+                } else {
+                    parentOfA.right = rightChildOfA;
+                }
+                A.right = null;
+
+                rightChildOfA.color = A.color;
+
+                A = rightChildOfA.right;
+            } else if (state ===  3) {
+            }
         
         return true;
     }
