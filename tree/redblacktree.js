@@ -270,7 +270,7 @@ class RedBlackTree  {
                 A = rightChildOfA.right;
             } else if (state ===  3) {
             }
-        
+        }
         return true;
     }
 
