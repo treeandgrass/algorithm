@@ -1,6 +1,7 @@
 class Node {
     constructor(c) {
         this.value  = c;
+        this.isEnd = false;
         this.chidren = [];
     }
 
@@ -35,6 +36,10 @@ class Trie {
             }
         }
 
+        if (!current.isEnd) {
+            current.isEnd = true;
+            return false;
+        }
         return isExit;
     }
 }
@@ -47,6 +52,8 @@ const str4 = 'bcd';
 const str5 = 'abcd';
 const str6 = 'efg';
 const str7 = 'hii';
+const str8 = 'ef'
+const str9 = 'ef'
 
 const  trie = new Trie();
 console.log(trie.insertString(str1));
@@ -58,3 +65,5 @@ console.log(trie.insertString(str6));
 console.log(trie.insertString(str7));
 console.log(trie.insertString(str6));
 console.log(trie.insertString(str1));
+console.log(trie.insertString(str8));
+console.log(trie.insertString(str9));
