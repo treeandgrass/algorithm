@@ -6,13 +6,12 @@ class Queue {
     }
 
     pop() {
-        while (this.stack1.length > 0) {
-            this.stack2.unshift(this.stack1.shift());
+        if (this.stack2.length === 0) {
+            while (this.stack1.length > 0) {
+                this.stack2.unshift(this.stack1.shift());
+            }
         }
         const value = this.stack2.shift();
-        while(this.stack2.length > 0) {
-            this.stack1.unshift(this.stack2.shift());
-        }
 
         this.length--;
         return value;
