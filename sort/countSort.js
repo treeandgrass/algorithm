@@ -2,7 +2,7 @@ function countSort(arr) {
     let tmp = [];
     for (let j = 0; j < arr.length; j++) {
         const k = arr[j];
-        tmp[k] = tmp[k]++ ? tmp[k]++ : 1;
+        tmp[k] = tmp[k] ? tmp[k]++ : 1;
     }
 
     let j = 0;
