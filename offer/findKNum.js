@@ -69,4 +69,4 @@ console.log(findKNumMethod(arr, 0, arr.length - 1, 9));
 console.log(findKNumMethod(arr, 0, arr.length - 1, 14));
 console.log(findKNumMethod(arr, 0, arr.length - 1, 15));
 console.log(findKNumMethod(arr, 0, arr.length - 1, 1));
-console.log(findKNumMethod(arr, 0, arr.length - 1, 0));
+console.log(findKNumMethod(arr, 0, arr.length - 1, 0)); 
