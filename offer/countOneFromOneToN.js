@@ -24,3 +24,5 @@ console.log(countOneFromOneToN(1));
 console.log(countOneFromOneToN(9));
 console.log(countOneFromOneToN(20));
 console.log(countOneFromOneToN(100));
+
+
